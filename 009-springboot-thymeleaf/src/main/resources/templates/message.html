@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>标准变更量表达式</h1>
+<div>
+    id:<span th:text="${user.id}"></span><br>
+    name:<span th:text="${user.name}"></span><br>
+    age:<span th:text="${user.age}"></span><br>
+</div>
+<h1>选择变量表达式:*{}</h1>
+<div th:object="${user}">
+    id:<span th:text="*{id}"></span><br>
+    name:<span th:text="*{name}"></span><br>
+    age:<span th:text="*{age}"></span><br>
+</div>
+<h1>混合使用</h1>
+id:<span th:text="*{user.id}"></span>
+
+<h1>路径表达式:@{}</h1>
+<a href="http://www.baidu.com">传统写法:跳转到百度</a><br>
+<a th:href="@{http://www.baidu.com}">跳转到百度</a>
+
+<a th:href="@{http://localhost:8080/user}">跳转到user</a><br>
+
+<h2>url相对路径(无参数)</h2>
+<a th:href="@{/user}">跳转到user</a>
+
+<h2>url带参数</h2>
+<a th:href="http://localhost:8080/user?rname='zhangsan'"></a>
+<a th:href="@{/user?username=zhangsan}"></a>
+
+
+
+<!--常用，推荐-->
+<a th:href="@{/user(id=${user.id},name=${user.name},age=${user.age})}"></a>
+</body>
+</html>

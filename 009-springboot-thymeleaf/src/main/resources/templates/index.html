@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h3>遍历userList集合</h3>
+<!--
+    user:当前循环变量的名称
+    userStat：当前循环对象状态的变量(可选，默认变量名+Stat)
+    ${userList}:当前循环的集合
+
+    遍历list和array一样
+-->
+<div th:each="user,userStat:${userList}">
+    count:<span th:text="${userStat.count}"></span><br>
+    id:<span th:text="${user.id}"></span><br>
+    name:<span th:text="${user.name}"></span><br>
+    age:<span th:text="${user.age}"></span><br>
+    <br>
+    <br>
+    <br>
+</div>
+
+<h3>循环遍历map集合</h3>
+<div th:each="userMap,userMapStat:${userMaps}">
+    <span th:text="${userMapStat.index}"></span><br>
+    <span th:text="${userMapStat.count}"></span><br>
+    <span th:text="${userMap.value}"></span><br>
+    <span th:text="${userMap.value.id}"></span><br>
+    <span th:text="${userMap.value.name}"></span><br>
+    <span th:text="${userMap.value.age}"></span>
+    <br>
+    <br>
+    <br>
+    <br>
+</div>
+
+
+<h2>条件判断</h2>
+<div th:if="${flag==true}">
+    flag=true
+</div>
+<div th:if="${flag eq false}">
+    flag=false
+</div>
+
+<h3>unless</h3>
+<div th:unless="${flag eq false}">
+    fff
+</div>
+
+
+<h2>内联表达式</h2>
+<div th:text="${data}"></div>
+<h3 th:text="${data}"></h3>
+
+<h2>内联文本</h2>
+<div th:inline="text">
+    数据:[[${data}]]
+
+</div>
+
+<h2>内联脚本</h2>
+
+<script type="text/javascript" th:inline="text">
+
+    function show() {
+
+        alert([[${data}]]);
+    }
+
+</script>
+<button th:onclick="show()">data</button>
+
+<h2>字符串拼接</h2>
+<span th:text="|data:${data},data2:${data2}|"></span>
+
+
+<h2>从session中取值</h2>
+<span th:text="${#session.getAttribute('data2')}"></span><br>
+<span th:text="${#httpSession.getAttribute('data2')}"></span><br>
+<!--<span th:text="${#session.data}"></span>-->
+
+<span th:text="${#httpServletRequest.queryString}"></span>
+</body>
+</html>
